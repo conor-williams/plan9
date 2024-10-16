@@ -37,13 +37,14 @@ typedef unsigned int uint32_t  ;
 		   __a->s6_addr32[0] == 0 \
 		&& __a->s6_addr32[1] == 0 \
 		&& __a->s6_addr32[2] == htonl (0xffff); } ))
-# define IN6_IS_ADDR_V4MAPPED_2 (addr) \
-     (({struct in6_addr *__a123 = (struct in6_addr *) (&addr); \
-	int val123 = 	__a123->s6_addr[0] == 0 && __a123->s6_addr[1] == 0 \
-			&& __a123->s6_addr[2] == 0 && __a123->s6_addr[3] == 0 \
-		&& __a123->s6_addr[4] == 0 && __a123->s6_addr[5] == 0 && __a123->s6_addr[6] == 0 && \
-			__a123->s6_addr[7] == 0 \
-		&& __a123->s6_addr[8] == htonl(0xf) && __a123->s6_addr[9] == htonl(0xf) \
-			&& __a123->s6_addr[10] == htonl(0xf) \
-			&& __a123->s6_addr[11] == htonl(0xf); }))
+# define IN6_IS_ADDR_V4_conor2_MAPPED(__a123) \
+	((__a123)->s6_addr[0] == 0 && (__a123)->s6_addr[1] == 0 \
+			&& (__a123)->s6_addr[2] == 0 && (__a123)->s6_addr[3] == 0 \
+		&& (__a123)->s6_addr[4] == 0 && (__a123)->s6_addr[5] == 0 && (__a123)->s6_addr[6] == 0 && \
+			(__a123)->s6_addr[7] == 0 \
+		&& (__a123)->s6_addr[8] == htonl(0xf) && (__a123)->s6_addr[9] == htonl(0xf) \
+			&& (__a123)->s6_addr[10] == htonl(0xf) \
+			&& (__a123)->s6_addr[11] == htonl(0xf))
+#define copysign_conor(a, b) \
+	((b) > 0? 0: -0)
 

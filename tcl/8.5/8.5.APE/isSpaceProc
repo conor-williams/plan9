@@ -1,0 +1,7 @@
+
+int
+TclIsSpaceProc(
+    int byte)
+{
+    return CHAR_TYPE(byte) & (TYPE_SPACE) || byte == '\n';
+}

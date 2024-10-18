@@ -10,6 +10,16 @@ addconorh () {
 	cat $orgfile >> $tmpfile
 	cp $tmpfile $orgfile
 }
+addconor2h () {
+	tmpfile=${1}.tmp
+	orgfile=$1
+	if [ -f $tmpfile ]; then 
+		return 0
+	fi	
+	echo "#include <conor2.h>" > $tmpfile
+	cat $orgfile >> $tmpfile
+	cp $tmpfile $orgfile
+}
 
 #cp /tmp/APE/* .
 #mkdir sys
@@ -35,13 +45,16 @@ echo "ready... to run make"
 #echo "#include <conor.h>" >> tclUnixChan.c.tmp
 #cat tclUnixChan.c >> tclUnixChan.c.tmp
 #cp tclUnixChan.c.tmp tclUnixChan.c
-addconorh tclUnixChan.c
+addconor2h tclUnixChan.c
 addconorh tclUnixSock.c
 addconorh tclUnixNotfy.c
 addconorh ../generic/tclStrToD.c
 addconorh tclUnixPipe.c
 addconorh ../generic/tclStrToD.c
 addconorh tclUnixInit.c
+if [ ! `grep IsSpacProc ../generic/tclParse.c` ] ; then
+	cat /tmp/APE/isSpaceProc >> ../generic/tclParse.c
+fi
 sed 's/IN6_IS_ADDR_V4MAPPED/IN6_IS_ADDR_V4_conor2_MAPPED/' tclUnixSock.c > tclUnixSock.c.tmp
 cp tclUnixSock.c.tmp tclUnixSock.c
 sed 's/copysign(/copysign_conor(/' ../generic/tclStrToD.c > ../generic/tclStrToD.c.tmp
@@ -54,7 +67,7 @@ cp ../generic/tclCmdMZ.c.tmp ../generic/tclCmdMZ.c
 if [ ! -f ../generic/tclInt.h.tmp ]; then
 	echo "int TclUtfCasecmp(const char *cs, const char *ct);" >> ../generic/tclInt.h.tmp
 	cat ../generic/tclInt.h.tmp >> ../generic/tclInt.h
-	#cp /tmp/APE/tclUtf.c ../generic/
+	cp /tmp/APE/tclUtf.c ../generic/
 fi
 
 #mknod comment out + remove comment tclUnixFCmd.c

@@ -1,0 +1,9 @@
+ struct in6_addr *__a123 = (struct in6_addr *) (&addr); 
+	int val123 = 	__a123->s6_addr[0] == 0 && __a123->s6_addr[1] == 0 
+			&& __a123->s6_addr[2] == 0 && __a123->s6_addr[3] == 0
+		&& __a123->s6_addr[4] == 0 && __a123->s6_addr[5] == 0 && __a123->s6_addr[6] == 0 && 
+			__a123->s6_addr[7] == 0 
+		&& __a123->s6_addr[8] == htonl(0xf) && __a123->s6_addr[9] == htonl(0xf) 
+			&& __a123->s6_addr[10] == htonl(0xf)
+			&& __a123->s6_addr[11] == htonl(0xf); 
+ if (!val123) {return 0;} 

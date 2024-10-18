@@ -39,7 +39,7 @@ echo "ready... to run make"
 #cp tclUnixChan.c.tmp tclUnixChan.c
 addconor2h tclUnixChan.c
 addconorh tclUnixSock.c
-addconorh tclUnixNotfy.c
+addconor2h tclUnixNotfy.c
 addconorh ../generic/tclStrToD.c
 addconorh tclUnixPipe.c
 addconorh ../generic/tclStrToD.c
@@ -47,6 +47,9 @@ addconorh tclUnixInit.c
 if [ ! `grep IsSpaceProc ../generic/tclParse.c` ] ; then
 	cat /tmp/APE/isSpaceProc >> ../generic/tclParse.c
 fi
+sed 's/u_int/unsigned int/' tclUnixFCmd.c > tclUnixFCmd.c.tmp
+cp tclUnixFCmd.c.tmp tclUnixFCmd.c
+
 sed 's/IN6_IS_ADDR_V4MAPPED/IN6_IS_ADDR_V4_conor2_MAPPED/' tclUnixSock.c > tclUnixSock.c.tmp
 cp tclUnixSock.c.tmp tclUnixSock.c
 sed 's/copysign(/copysign_conor(/' ../generic/tclStrToD.c > ../generic/tclStrToD.c.tmp
